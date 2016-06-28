@@ -53,7 +53,7 @@ const CGSize NilCacheSize ={-1,-1};
     CGSize modelSize= [self getCacheSizeForModel:model];
     //没有就计算一下
     if( CGSizeEqualToSize(modelSize, NilCacheSize)){
-        CGSize modelSize= block(model,collectionView);
+        modelSize= block(model,collectionView);
         
         //计算完成存入缓存中
         [self setOrientationSize:modelSize forModel:model];
@@ -67,11 +67,11 @@ const CGSize NilCacheSize ={-1,-1};
     CGSize modelSize= [self getCacheSizeForModel:model];
     //没有就计算一下
     if( CGSizeEqualToSize(modelSize, NilCacheSize)){
-        CGFloat modelHeight= block(model,tableView);
+        modelSize.height= block(model,tableView);
         
         //计算完成存入缓存中
-        [self setOrientationSize:CGSizeMake(-1, modelHeight) forModel:model];
-        NSLog(@"计算行高 :%@",@(modelHeight));
+        [self setOrientationSize:modelSize forModel:model];
+        NSLog(@"计算行高 :%@",@(modelSize.height));
     }
     return modelSize.height;
 }
